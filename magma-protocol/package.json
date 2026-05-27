@@ -1,0 +1,95 @@
+{
+  "name": "magma-protocol",
+  "displayName": "MAGMA Protocol",
+  "description": "Type-safe sovereign governance — emoji tier instructions, WORM chain sealing, agent routing",
+  "version": "0.1.0",
+  "publisher": "snapkitty",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      { "command": "magma.seal",      "title": "🔒 MAGMA: Seal",          "category": "MAGMA" },
+      { "command": "magma.vault",     "title": "🏦 MAGMA: Vault Approve", "category": "MAGMA" },
+      { "command": "magma.anchor",    "title": "📜 MAGMA: Anchor to WORM","category": "MAGMA" },
+      { "command": "magma.flux",      "title": "⚡ MAGMA: Flux Broadcast","category": "MAGMA" },
+      { "command": "magma.forge",     "title": "⚒️ MAGMA: Forge Build",   "category": "MAGMA" },
+      { "command": "magma.watch",     "title": "👁 MAGMA: Sentinel Watch","category": "MAGMA" },
+      { "command": "magma.query",     "title": "🔮 MAGMA: Oracle Query",  "category": "MAGMA" },
+      { "command": "magma.panel",     "title": "§ MAGMA: Open Panel",     "category": "MAGMA" },
+      { "command": "magma.sealFile",  "title": "🔒 MAGMA: Seal Current File", "category": "MAGMA" },
+      { "command": "magma.chainHead", "title": "📜 MAGMA: Show Chain Head",    "category": "MAGMA" }
+    ],
+    "keybindings": [
+      { "command": "magma.panel",    "key": "ctrl+shift+m", "mac": "cmd+shift+m" },
+      { "command": "magma.seal",     "key": "ctrl+shift+s", "mac": "cmd+shift+s", "when": "editorTextFocus" },
+      { "command": "magma.sealFile", "key": "ctrl+shift+l", "mac": "cmd+shift+l" }
+    ],
+    "menus": {
+      "editor/context": [
+        { "command": "magma.seal",     "group": "magma@1", "when": "editorHasSelection" },
+        { "command": "magma.sealFile", "group": "magma@2" },
+        { "command": "magma.anchor",   "group": "magma@3" }
+      ],
+      "commandPalette": [
+        { "command": "magma.seal" },
+        { "command": "magma.vault" },
+        { "command": "magma.anchor" },
+        { "command": "magma.flux" },
+        { "command": "magma.forge" },
+        { "command": "magma.watch" },
+        { "command": "magma.query" },
+        { "command": "magma.panel" },
+        { "command": "magma.sealFile" },
+        { "command": "magma.chainHead" }
+      ]
+    },
+    "configuration": {
+      "title": "MAGMA Protocol",
+      "properties": {
+        "magma.osUrl": {
+          "type": "string",
+          "default": "http://localhost:3000",
+          "description": "SnapKitty OS base URL"
+        },
+        "magma.sealOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically seal file hash to WORM chain on save"
+        },
+        "magma.sealOnCommit": {
+          "type": "boolean",
+          "default": true,
+          "description": "Seal commit hash to WORM chain via LEDGE on git commit"
+        },
+        "magma.agentDefault": {
+          "type": "string",
+          "default": "FORGE",
+          "enum": ["CIPHER","ORACLE","SENTINEL","MNEMEX","AXIOM","HERALD","FORGE","NOVA","NEXUS","VAULT","PHANTOM"],
+          "description": "Default agent for context-free instructions"
+        }
+      }
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "magma.chainView",
+          "name": "WORM Chain",
+          "icon": "$(lock)",
+          "contextualTitle": "Sovereign Audit Chain"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch":   "tsc -watch -p ./",
+    "package": "npx @vscode/vsce package"
+  },
+  "devDependencies": {
+    "@types/node":   "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript":    "^5.0.0"
+  }
+}

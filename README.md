@@ -112,3 +112,5 @@ TIER PREFIXES          $ SHORTHANDS
 
 *MIT License · SnapKitty Collective · 2026*
 *"The development environment that seals every decision."*
+
+![](https://sovereign-analytics.snapkittywest.workers.dev/canary/sovereign-ide-extensions)
